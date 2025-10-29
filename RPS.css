@@ -1,0 +1,246 @@
+body {
+    background: #c7b198; 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.game-container {
+    border: 2px solid black;
+    height: 400px;
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Enhanced Rock Paper Scissors Game CSS */
+/* Builds on the previous version with distinct designs for the title (gradient, animated glow) 
+   and each choice div (unique colors, icons via Unicode, subtle patterns). Choices now 
+   align horizontally on desktop. Still fully responsive and vanilla CSS. */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden; /* Prevent scroll if needed */
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #1a252f 100%); /* Dark, stormy arena gradient */
+  background-attachment: fixed; /* Parallax-like feel on scroll */
+  position: relative;
+  font-family: 'Arial', sans-serif; /* Clean, default font */
+  color: #ecf0f1; /* Light text for contrast */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="paper" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.05"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.05"/><circle cx="50" cy="10" r="0.5" fill="%23bdc3c7" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23paper)"/></svg>'); /* Subtle paper texture via SVG */
+  background-size: cover;
+  pointer-events: none; /* Doesn't interfere with interactions */
+  z-index: 1;
+}
+
+.game-container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  width: 90%;
+  padding: 40px 20px;
+  background: rgba(0, 0, 0, 0.2); /* Semi-transparent overlay for readability */
+  border-radius: 20px;
+  box-shadow: 
+    inset 0 0 50px rgba(0, 0, 0, 0.5), /* Inner glow */
+    0 0 30px rgba(52, 73, 94, 0.8), /* Outer rock shadow */
+    0 10px 20px rgba(0, 0, 0, 0.3); /* Grounded feel */
+  backdrop-filter: blur(10px); /* Modern glass-morphism effect if supported */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px; /* Space between title and choices */
+}
+
+/* Enhanced Title styling: Gradient text with pulsing glow animation */
+.game-container p {
+  margin: 0;
+  font-size: 2.5em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  background: linear-gradient(45deg, #e74c3c, #f39c12, #e74c3c); /* Fiery gradient */
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease-in-out infinite, glowPulse 2s ease-in-out infinite alternate; /* Animated gradient and glow */
+  text-shadow: 
+    0 0 10px rgba(231, 76, 60, 0.5), /* Base glow */
+    2px 2px 4px rgba(0, 0, 0, 0.5); /* Dramatic shadow */
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes glowPulse {
+  from { text-shadow: 0 0 10px rgba(231, 76, 60, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.5); }
+  to { text-shadow: 0 0 20px rgba(231, 76, 60, 0.8), 0 0 30px rgba(231, 76, 60, 0.4), 2px 2px 4px rgba(0, 0, 0, 0.5); }
+}
+
+/* Wrapper for choices: Horizontal flex row */
+.choices-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap; /* Allow wrap on very small screens */
+}
+
+/* Base Choice buttons styling: Circular with icons */
+.game-container .choices-wrapper > div {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  padding: 0;
+  border: 3px solid #7f8c8d; /* Metallic border */
+  border-radius: 50%; /* Circular buttons */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth hover transitions */
+  user-select: none; /* Prevent text selection */
+  overflow: hidden; /* For subtle patterns */
+}
+
+/* Icon styling: Large Unicode symbol above text */
+.game-container .choices-wrapper > div::before {
+  font-size: 3em;
+  line-height: 1;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Text under icon */
+.game-container .choices-wrapper > div span {
+  font-size: 0.8em;
+  letter-spacing: 1px;
+}
+
+/* Specific designs for each choice using nth-child */
+.game-container .choices-wrapper > div:nth-child(1) { /* Rock: Earthy tones with subtle crack pattern */
+  background: linear-gradient(145deg, #8b4513, #a0522d); /* Brown/gray rock gradient */
+  color: #f4f4f4;
+  box-shadow: 
+    0 5px 15px rgba(139, 69, 19, 0.4), /* Earthy drop shadow */
+    inset 0 2px 0 rgba(255, 255, 255, 0.1); /* Highlight */
+}
+.game-container .choices-wrapper > div:nth-child(1)::before { content: '✊'; } /* Fist for Rock */
+.game-container .choices-wrapper > div:nth-child(1)::after { /* Subtle crack pattern */
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  width: 2px;
+  height: 60%;
+  background: rgba(0, 0, 0, 0.3);
+  transform: rotate(15deg);
+}
+
+.game-container .choices-wrapper > div:nth-child(2) { /* Paper: Light, folded texture */
+  background: linear-gradient(145deg, #f8f9fa, #e9ecef); /* Off-white gradient */
+  color: #495057;
+  box-shadow: 
+    0 5px 15px rgba(248, 249, 250, 0.3), /* Soft shadow */
+    inset 0 1px 0 rgba(0, 0, 0, 0.05); /* Fold line */
+}
+.game-container .choices-wrapper > div:nth-child(2)::before { content: '✋'; } /* Open hand for Paper */
+.game-container .choices-wrapper > div:nth-child(2)::after { /* Fold shadow */
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+  width: 30%;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 1px;
+}
+
+.game-container .choices-wrapper > div:nth-child(3) { /* Scissors: Metallic blue with shine */
+  background: linear-gradient(145deg, #4682b4, #5a9bd4); /* Steel blue gradient */
+  color: #ffffff;
+  box-shadow: 
+    0 5px 15px rgba(70, 130, 180, 0.4), /* Cool shadow */
+    inset 0 2px 0 rgba(255, 255, 255, 0.3), /* Shine highlight */
+    inset 0 -2px 0 rgba(0, 0, 0, 0.2); /* Edge depth */
+}
+.game-container .choices-wrapper > div:nth-child(3)::before { content: '✂️'; } /* Scissors emoji */
+
+/* Hover effects: Universal lift, plus color-specific glows */
+.game-container .choices-wrapper > div:hover {
+  transform: translateY(-5px) scale(1.05); /* Lift and grow */
+  box-shadow: 
+    0 8px 25px rgba(231, 76, 60, 0.4), /* Universal red glow */
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.game-container .choices-wrapper > div:nth-child(1):hover { border-color: #cd853f; } /* Golden for Rock */
+.game-container .choices-wrapper > div:nth-child(2):hover { border-color: #dee2e6; } /* Light gray for Paper */
+.game-container .choices-wrapper > div:nth-child(3):hover { border-color: #87ceeb; } /* Sky blue for Scissors */
+
+.game-container .choices-wrapper > div:active {
+  transform: translateY(-2px) scale(1.02); /* Pressed effect */
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile responsiveness: Stack choices vertically */
+@media (max-width: 768px) {
+  .game-container {
+    width: 95%;
+    padding: 30px 15px;
+    gap: 20px;
+  }
+  
+  .game-container p {
+    font-size: 2em;
+  }
+  
+  .choices-wrapper {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .game-container .choices-wrapper > div {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .game-container .choices-wrapper > div::before {
+    font-size: 2.5em;
+  }
+  
+  .game-container .choices-wrapper > div span {
+    font-size: 0.7em;
+  }
+}
+
+/* Accessibility: Focus styles */
+.game-container .choices-wrapper > div:focus {
+  outline: 3px solid #3498db;
+  outline-offset: 2px;
+}
