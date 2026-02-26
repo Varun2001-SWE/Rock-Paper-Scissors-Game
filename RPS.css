@@ -245,3 +245,21 @@ body::before {
   outline-offset: 2px;
 }
 
+.choice_state {
+  display: flex;
+  gap: 20px;
+}
+
+.cpu_box {
+  border : 2px solid orange;
+  border-radius: 10% / 50%;
+  background-color: #a0522d;
+  padding: 15px;
+}
+
+.user_box {
+  border : 2px solid blue;
+  border-radius: 10% / 50%;
+  background-color: #a0522d;
+  padding: 15px;
+}

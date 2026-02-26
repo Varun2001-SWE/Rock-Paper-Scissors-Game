@@ -9,6 +9,7 @@ const game_result = document.querySelector(".game_result");
 const playAgain = document.querySelector(".again");
 const computer_choice = document.querySelector(".computer_choice");
 const cpu = document.querySelector(".cpu");
+const user = document.querySelector(".user");
 
 function getRandomvalues(min,max) {
     return Math.floor(Math.random() * (max - min) + min);
@@ -89,6 +90,7 @@ function playGame() {
         let humanSelection = humanChoice;
         let computerSelection = getComputerChoice();
         console.log(`the computer chose ${computerSelection}`);
+        user.textContent =`${humanSelection}`;
         cpu.textContent = ` ${computerSelection}`;
         cpuChoice(computerSelection);
         const result = playRound(humanSelection, computerSelection);
